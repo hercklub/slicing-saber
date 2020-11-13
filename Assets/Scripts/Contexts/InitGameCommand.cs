@@ -23,6 +23,5 @@ namespace Contexts
             AppFsm.SwitchState(new GameAppState());
         }
         
-
     }
 }

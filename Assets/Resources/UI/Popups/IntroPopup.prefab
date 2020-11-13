@@ -157,9 +157,13 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'This is just simple code sample showcase.
+  m_Text: 'This is sample project showing off code using StrageIoC framework.
 
-'
+
+    <b>Controls:</b>
+    Mouse to control blade
+
+    Goal is to slice incomming cubes with the  blade.'
 --- !u!1 &2763760809999985748
 GameObject:
   m_ObjectHideFlags: 0
