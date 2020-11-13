@@ -26,5 +26,5 @@ Commands are objects that are bind to specific signal calls serve as a nice cont
 FSM is used to control the game lifecycle.
 
 ## Credits
-[Strange](https://github.com/strangeioc/strangeioc) core framework used in this application\
+[Strange](https://github.com/strangeioc/strangeioc) - core framework used in this application\
 Framewerk - extension co-developed with Matej Ošanec
