@@ -4,7 +4,6 @@ using UnityEngine;
 public class LayerMasks
 {
     protected static LayerMask _enemyLayerMask = 0;
-    protected static LayerMask _boundaryLayerMask = 0;
 
     public static LayerMask EnemyLayerMask
     {
@@ -19,19 +18,7 @@ public class LayerMasks
         }
     }
 
-    public static LayerMask BoundaryLayerMask
-    {
-        get
-        {
-            if (_boundaryLayerMask.value == 0)
-            {
-                _boundaryLayerMask = GetLayerMask("Boundary");
-            }
-
-            return _boundaryLayerMask;
-        }
-    }
-
+    
 
     private static LayerMask GetLayerMask(string layerName)
     {

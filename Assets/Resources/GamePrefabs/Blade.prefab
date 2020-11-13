@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9189493685437026367}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: BotPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5461552756794604115}
   - component: {fileID: 5070589202015727369}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: BladeCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 848219745888953358}
   - component: {fileID: 5001069973530087160}
   - component: {fileID: 5016339911331089595}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Hadnle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +172,7 @@ GameObject:
   m_Component:
   - component: {fileID: 425296240376070092}
   - component: {fileID: 6012023971127624600}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Blade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +210,6 @@ MonoBehaviour:
   Hand: 1
   BladeCollider: {fileID: 5070589202015727369}
   BladeGoodParticleSystem: {fileID: 8816099640877001989}
-  BurnMarkParticle: {fileID: 0}
 --- !u!1 &4152608109517136063
 GameObject:
   m_ObjectHideFlags: 0
@@ -4929,7 +4928,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8845309675266295686}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: TopPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}

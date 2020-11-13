@@ -21,11 +21,9 @@ namespace Blade
         public float BladeSpeed;
 
         private Collider[] _colliders = new Collider[16];
-
-        public Signal<BladeInteractableObject> OnSkewed = new Signal<BladeInteractableObject>();
-
-        public Signal<BladeInteractableObject, Vector3, Quaternion, Vector3> OnSliced =
-            new Signal<BladeInteractableObject, Vector3, Quaternion, Vector3>();
+        
+        public Signal<BladeInteractableView, Vector3, Quaternion, Vector3> OnSliced =
+            new Signal<BladeInteractableView, Vector3, Quaternion, Vector3>();
 
         private BladeData _currentData;
 
@@ -48,41 +46,29 @@ namespace Blade
             if (GeometryTools.ThreePointsToBox(topPos, bottomPos, (prevBottomPos + prevTopPos) * 0.5f, out vector, out halfExtents, out orientation))
             {
                 int num = Physics.OverlapBoxNonAlloc(vector, halfExtents, this._colliders, orientation, LayerMasks.EnemyLayerMask);
-                if (num > 0)
+                for (int i = 0; i < num; i++)
                 {
-                    EvalCut(_colliders[0], vector, orientation);
+                    EvalCut(_colliders[i], vector, orientation);
                 }
-
             }
         }
         
 
         private void EvalCut(Collider col, Vector3 cutPoint, Quaternion orientation)
         {
-            BladeInteractableObject enemy = col.gameObject.GetComponentInParent<BladeInteractableObject>();
+            BladeInteractableView enemy = col.gameObject.GetComponentInParent<BladeInteractableView>();
 
             if (enemy != null)
             {
-                if (EvalSkewer(enemy))
-                {
-                    SetSkewed(enemy);
-                }
-                else if (EvalSlice(enemy))
+                if (EvalSlice(enemy))
                 {
                     SetSliced(enemy, cutPoint, orientation);
                 }
             }
         }
         
-        private void SetSkewed(BladeInteractableObject enemyBase)
-        {
-            if (!enemyBase.IsSkewed)
-                return;
 
-            OnSkewed.Dispatch(enemyBase);
-        }
-
-        private void SetSliced(BladeInteractableObject enemyBase, Vector3 contactPoint, Quaternion orientation)
+        private void SetSliced(BladeInteractableView enemyBase, Vector3 contactPoint, Quaternion orientation)
         {
             if (!enemyBase.IsSlicable)
             {
@@ -92,39 +78,11 @@ namespace Blade
             OnSliced.Dispatch(enemyBase, contactPoint, orientation, _currentData.topPos - LastData.topPos);
         }
 
-        private bool EvalSlice(BladeInteractableObject sliceObject)
+        private bool EvalSlice(BladeInteractableView sliceObject)
         {
             return true;
         }
-
-        private bool EvalSkewer(BladeInteractableObject sliceObject)
-        {
-            if (sliceObject.IsSkewed)
-                return false;
-
-            if (sliceObject.IsCollectable)
-            {
-                var collectPoint = Vector3.Lerp(LastData.botPos, LastData.topPos, PokeEndPointPercentage);
-                if (Vector3.Dot((sliceObject.transform.position - collectPoint).normalized, this.transform.forward) < PokeAngle)
-                    return false;
-            }
-            else if (sliceObject.IsBomb)
-            {
-                // position on blade
-                var collectPoint = Vector3.Lerp(LastData.botPos, LastData.topPos, BombPokeEndPointPercentage);
-                if (Vector3.Dot((sliceObject.transform.position - collectPoint).normalized, this.transform.forward) < BombPokeAngle)
-                    return false;
-            }
-            else
-            {
-                if (Vector3.Dot((sliceObject.transform.position - LastData.topPos).normalized, this.transform.forward) < PokeAngle)
-                    return false;
-            }
-            
-            return true;
-        }
-
-
+        
 
     }
 }
