@@ -1,0 +1,29 @@
+Temp
+Library
+ScratchWars.userprefs
+battle-log.txt
+battle-bm-log.txt
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+ExportedObj/
+obj/
+*.svd
+*.userprefs
+/*.csproj
+*.pidb
+*.suo
+/*.sln
+*.user
+*.unityproj
+*.booproj
+Assets/Game/Resources/BattleLogs
+Logs
+battle-test-log.txt
+UnitTests/bin
+
+# IDEs
+.vs
+.idea
+Assets/Plugins/Editor/JetBrains
