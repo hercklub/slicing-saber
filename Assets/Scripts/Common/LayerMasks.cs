@@ -23,7 +23,7 @@ public class LayerMasks
     private static LayerMask GetLayerMask(string layerName)
     {
         int num = LayerMask.NameToLayer(layerName);
-        LayerMask result = default(LayerMask);
+        LayerMask result = default;
         result.value = 1 << num;
         return result;
     }

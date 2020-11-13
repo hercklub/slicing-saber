@@ -14,7 +14,7 @@ namespace Enemy.Models
         EnemyDataModel GetTarget(int id);
         int NextTargetId { get; }
 
-        // todo: move to separate data model
+        // todo: move score to separate data model
         void AddScore(bool success);
         int SlicedScore { get; }
         int MissedScore { get; }
@@ -38,6 +38,7 @@ namespace Enemy.Models
         {
             _slicedScore = 0;
             _missedScore = 0;
+            
             RemoveAllEnemies();
         }
 

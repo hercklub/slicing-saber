@@ -3,7 +3,7 @@ using strange.extensions.signal.impl;
 
 namespace Blades
 {
-    public class BladeSelectSignal : Signal<BladeDataDefinitionSO>
+    public class BladeSelectedSignal : Signal<BladeDataDefinitionSO>
     {
         
     }

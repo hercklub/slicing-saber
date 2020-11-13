@@ -9,9 +9,7 @@ namespace Blade
         public BladeCollider BladeCollider;
 
         public ParticleSystem BladeGoodParticleSystem;
-
-        [SerializeField]
-        private ParticleSystem.MainModule BladeMainModule;
+        
         [SerializeField]
         private ParticleSystem.TrailModule BladeTrailsModule;
         
@@ -19,7 +17,6 @@ namespace Blade
 
         private void Awake()
         {
-            BladeMainModule = BladeGoodParticleSystem.main;
             BladeTrailsModule = BladeGoodParticleSystem.trails;
         }
 
@@ -27,14 +24,7 @@ namespace Blade
         {
             BladeTrailsModule.colorOverLifetime = color;
         }
-
-        public void SetChargeProgress(float charge)
-        {
-            if (!Mathf.Approximately(charge, _currentCharge))
-            {
-                _currentCharge = charge;
-            }
-        }
+        
         
     }
 }

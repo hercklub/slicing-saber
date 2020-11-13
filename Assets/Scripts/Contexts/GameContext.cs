@@ -59,7 +59,7 @@ namespace Contexts
 
             //signals 
             injectionBinder.Bind<ButtonClickedSignal>().ToSingleton();
-            injectionBinder.Bind<BladeSelectSignal>().ToSingleton();
+            injectionBinder.Bind<BladeSelectedSignal>().ToSingleton();
             injectionBinder.Bind<EnemyAddedSignal>().ToSingleton();
             injectionBinder.Bind<EnemyRemovedSignal>().ToSingleton();
 

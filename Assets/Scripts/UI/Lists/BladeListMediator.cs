@@ -9,7 +9,7 @@ using UnityEngine;
 public class BladeListMediator : ListMediator<BladeListView, BladeDataProvider>
 {
     [Inject] public IBladesDataDefinitions BladesDataDefinitions { get; set; }
-    [Inject] public BladeSelectSignal BladeSelectSignal { get; set; }
+    [Inject] public BladeSelectedSignal BladeSelectSignal { get; set; }
     
     [Inject] public RestartGameSignal RestartGameSignal { get; set; }
     public override void OnRegister()

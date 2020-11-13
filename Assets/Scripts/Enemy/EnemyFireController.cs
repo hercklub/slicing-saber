@@ -32,6 +32,7 @@ namespace Enemy
             if (_coolDown <= 0f)
             {
                 int enemyId = EnemyDataModels.NextTargetId;
+                //todo: bunch of magic constants, move to config
                 // randomize start pos X coordinate
                 Vector3 startPos = Vector3.forward * 6f + Vector3.right * (Random.value * 2f - 1f);
                 // dir calculated form start pos toward blade + added randomized X coordinate

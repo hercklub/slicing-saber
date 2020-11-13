@@ -49,7 +49,7 @@ namespace Framewerk.AppStateMachine
                 parent = ViewConfig.Container3d;
 
             path += UiManager.GetViewName(typeof(T));
-            //TODO: remove magic string
+            
             GameObject gamePrefab = AssetManager.GetAsset<GameObject>("GamePrefabs/" + path);
             gamePrefab.transform.SetParent(parent, false);
 

@@ -11,7 +11,7 @@ namespace Blades
     {
         [Inject] public BladeView View { get; set; }
         [Inject] public IBladesModel BladesModel { get; set; }
-        [Inject] public BladeSelectSignal BladeSelectSignal { get; set; }
+        [Inject] public BladeSelectedSignal BladeSelectSignal { get; set; }
         [Inject] public IInputController InputController { get; set; }
 
         [Inject] public IUpdater Updater { get; set; }
