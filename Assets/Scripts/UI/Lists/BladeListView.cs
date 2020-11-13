@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Framewerk.UI.List;
 using UnityEngine;
+using UnityEngine.UI;
+using ListView = Framewerk.UI.List.ListView;
 
 public class BladeListView : ListView
 {
-
+    public Button RestartButton;
 }

@@ -1,8 +1,10 @@
-﻿using Blade;
+﻿using Arena;
+using Blade;
 using Blades;
 using Enemies;
 using Framewerk.AppStateMachine;
 using strange.extensions.pool.api;
+using UI;
 using UnityEngine;
 
 namespace AppFsm.Screen
@@ -19,13 +21,16 @@ namespace AppFsm.Screen
             EnemyObjectsPool.instanceProvider = EnemyInstanceProvider;
             
             InstantiateView<BladeListView>();
+            InstantiateView<ScoreView>();
+            
             InstantiateGamePrefab<BladeView>();
+            InstantiateGamePrefab<ArenaView>();
         }
 
-        public void InstantiateFlyingEnemyUnit()
+        public void InstantiateFlyingEnemyUnit(int id)
         {
             var flyingEnemy =EnemyObjectsPool.GetInstance();
-            Debug.Log("Deploy");
+            flyingEnemy.Id = id;
             flyingEnemy.Deploy();
         }
     }

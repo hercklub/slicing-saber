@@ -11,12 +11,6 @@ namespace Blade
 
         public Transform BotPos;
         public Transform TopPos;
-        
-        public float PokeAngle = 0.1f;
-        public float PokeEndPointPercentage = 0.7f;
-        
-        public float BombPokeAngle = 0.1f;
-        public float BombPokeEndPointPercentage = 0.8f;
 
         public float BladeSpeed;
 

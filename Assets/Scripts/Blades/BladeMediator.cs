@@ -1,4 +1,5 @@
 using Blade;
+using Common;
 using Definitions;
 using strange.extensions.mediation.impl;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace Blades
         [Inject] public BladeView View { get; set; }
         [Inject] public IBladesModel BladesModel { get; set; }
         [Inject] public BladeSelectSignal BladeSelectSignal { get; set; }
+        [Inject] public IInputController InputController { get; set; }
 
         private IBladeModel _bladeModel;
 
@@ -20,6 +22,7 @@ namespace Blades
 
             _bladeModel = new BladeModel(View.BladeCollider,
                 Vector3.Distance(View.BladeCollider.TopPos.position, View.BladeCollider.BotPos.position));
+            
             BladesModel.AddBlade(View.Hand, _bladeModel);
 
             View.BladeCollider.OnSliced.AddListener(SlicedHandler);
@@ -48,14 +51,5 @@ namespace Blades
             }
         }
 
-
-        private void Update()
-        {
-            if (_bladeModel != null)
-            {
-                _bladeModel.Update();
-                View.SetChargeProgress(_bladeModel.RemainingNormalizedCharge);
-            }
-        }
     }
 }

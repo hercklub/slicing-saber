@@ -1,4 +1,6 @@
 ﻿using System;
+using Enemy;
+using Enemy.Models;
 using strange.extensions.mediation.impl;
 using strange.extensions.pool.api;
 using strange.extensions.signal.impl;
@@ -15,12 +17,22 @@ namespace Blades
     public class BladeInteractableView : View, IBladeInteractable, IPoolable
     {
         [Inject] public IPool<BladeInteractableView> EnemyObjectsPool { get; set; }
+        [Inject] public IEnemyDataModels EnemyDataModels { get; set; }
+        [Inject] public EnemyRemovedSignal EnemyRemovedSignal { get; set; }
 
+        
+        public int Id;
         public bool IsSlicable;
         public Rigidbody Rb;
 
         public bool retain { get; set; }
         
+        void Awake()
+        {
+            gameObject.SetActive(false);
+        }
+        
+
         public void Retain()
         {
             retain = true;
@@ -34,38 +46,53 @@ namespace Blades
         public void Restore()
         {
             gameObject.SetActive(false);
-            Rb.velocity = Vector3.zero;
+            EnemyRemovedSignal.RemoveListener(EnemyRemovedHandler);
 
         }
 
         public void Deploy()
         {
-            transform.position = Vector3.zero;
-
+            EnemyDataModel enemyData = EnemyDataModels.GetTarget(Id);
+            transform.position = enemyData.StartPos;
+            
             gameObject.SetActive(true);
+            Rb.velocity = Vector3.zero;
+
+            Rb.AddForce(enemyData.StartDir * enemyData.StartForce, ForceMode.Impulse);
+            
+            EnemyRemovedSignal.AddListener(EnemyRemovedHandler);
             
         }
 
-        void Awake()
+        private void EnemyRemovedHandler(int id)
         {
-            gameObject.SetActive(false);
+            if (Id == id)
+            {
+                DestroyObject();
+            }
         }
 
         public void SetSliced(Vector3 contactPoint, ControlerHand hand, Quaternion orientation, Vector3 cutDir)
         {
-            //EnemyObjectsPool.ReturnInstance(this);
+            RemoveEnemy(true);
         }
 
-        public void DestroyObject()
+        private void RemoveEnemy(bool success)
+        {
+            EnemyDataModels.AddScore(success);
+            EnemyDataModels.RemoveEnemy(Id);
+        }
+
+        private void DestroyObject()
         {
             EnemyObjectsPool.ReturnInstance(this);
         }
 
         private void Update()
         {
-            if (transform.position.y < -5f)
+            if (transform.position.y < -2f)
             {
-                DestroyObject();
+                RemoveEnemy(false);
             }
         }
     }

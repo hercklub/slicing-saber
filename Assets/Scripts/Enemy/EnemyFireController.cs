@@ -1,4 +1,5 @@
-﻿using Framewerk;
+﻿using Enemy.Models;
+using Framewerk;
 using UnityEngine;
 
 namespace Enemy
@@ -12,11 +13,10 @@ namespace Enemy
     public class EnemyFireController : IEnemyFireController
     {
         [Inject] public IUpdater Updater { get; set; }
-        [Inject] public EnemyAddedSignal EnemyAddedSignal { get; set; }
-        
+        [Inject] public IEnemyDataModels EnemyDataModels { get; set; }
 
         private float _coolDown = 2f;
-        
+
         public void Init()
         {
             Updater.EveryFrame(UpdateEnemies);
@@ -31,8 +31,13 @@ namespace Enemy
         {
             if (_coolDown <= 0f)
             {
-                EnemyAddedSignal.Dispatch();
-                _coolDown = 2f;
+                int enemyId = EnemyDataModels.NextTargetId;
+                // randomize start pos X coordinate
+                Vector3 startPos = Vector3.forward * 6f + Vector3.right * (Random.value * 2f - 1f);
+                // dir calculated form start pos toward blade + added randomized X coordinate
+                Vector3 startDir = (-startPos + Vector3.up * 4f + Vector3.right * (0.5f * (Random.value * 2f - 1f))).normalized;
+                EnemyDataModels.AddEnemy(new EnemyDataModel(enemyId, startPos, startDir, 0.8f));
+                _coolDown = Random.Range(0.2f, 2f);
             }
 
             _coolDown -= Time.deltaTime;

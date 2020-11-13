@@ -2,7 +2,7 @@
 
 namespace Enemy
 {
-    public class EnemyAddedSignal : Signal<int>
+    public class EnemyRemovedSignal : Signal<int>
     {
         
     }

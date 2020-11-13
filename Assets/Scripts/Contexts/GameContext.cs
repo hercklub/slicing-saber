@@ -1,6 +1,8 @@
 using AppFsm.Screen;
+using Arena;
 using Blade;
 using Blades;
+using Common;
 using Definitions;
 using Enemies;
 using Enemy;
@@ -51,24 +53,24 @@ namespace Contexts
             injectionBinder.Bind<ICoroutineManager>().To(CoroutineManager.Instance);
             injectionBinder.Bind<IAssetManager>().To<AssetManager>().ToSingleton();
             injectionBinder.Bind<IUiManager>().To<UiManager>().ToSingleton();
+            
+            //instance providers
             injectionBinder.Bind<EnemyInstanceProvider>().ToValue(_enemyInstanceProvider);
 
             //signals 
             injectionBinder.Bind<ButtonClickedSignal>().ToSingleton();
             injectionBinder.Bind<BladeSelectSignal>().ToSingleton();
             injectionBinder.Bind<EnemyAddedSignal>().ToSingleton();
-            
+            injectionBinder.Bind<EnemyRemovedSignal>().ToSingleton();
 
             //commands
             commandBinder.Bind<ContextStartSignal>().To<InitAppCommand>();
             commandBinder.Bind<InitGameSignal>().To<InitGameCommand>();
+            commandBinder.Bind<RestartGameSignal>().To<RestartGameCommand>();
             
-            //impl
-            injectionBinder.Bind<IBladesEffectsImpl>().To<BladesEffectsImpl>().ToSingleton();
-
             //models
             injectionBinder.Bind<IBladesModel>().To<BladesModel>().ToSingleton();
-            injectionBinder.Bind<IEnemyModels>().To<EnemyDataModel>().ToSingleton();
+            injectionBinder.Bind<IEnemyDataModels>().To<EnemyDataModels>().ToSingleton();
 
             //defs
             injectionBinder.Bind<IBladesDataDefinitions>().To<BladesDataDefinitions>().ToSingleton();
@@ -82,17 +84,19 @@ namespace Contexts
             
             //controllers
             injectionBinder.Bind<IEnemyFireController>().To<EnemyFireController>().ToSingleton();
-
+            injectionBinder.Bind<IInputController>().To<InputController>().ToSingleton();
 
             //view mediation
             //ui
             mediationBinder.Bind<IntroPopupView>().To<IntroPopupMediator>();
             mediationBinder.Bind<BladeListView>().To<BladeListMediator>();
             mediationBinder.Bind<BladeListItemView>().To<BladeListItemMediator>();
+            mediationBinder.Bind<ScoreView>().To<ScoreMediator>();
+            
 
            //game
             mediationBinder.Bind<BladeView>().To<BladeMediator>();
-            mediationBinder.Bind<BladesEffectView>().To<BladesEffectMediator>();
+            mediationBinder.Bind<ArenaView>().To<ArenaMediator>();
             
             injectionBinder.Bind<BladeInteractableView>().To<BladeInteractableView>();
             injectionBinder.Bind<IPool<BladeInteractableView>>().To<Pool<BladeInteractableView>>().ToSingleton();

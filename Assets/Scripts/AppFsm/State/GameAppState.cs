@@ -1,4 +1,5 @@
 ﻿using AppFsm.Screen;
+using Common;
 using Enemy;
 using Framewerk.AppStateMachine;
 using UnityEngine;
@@ -9,27 +10,30 @@ namespace AppFsm.State
     {
         [Inject] public EnemyAddedSignal EnemyAddedSignal { get; set; }
         [Inject] public IEnemyFireController EnemyFireController { get; set; }
-
+        [Inject] public IInputController InputController { get; set; }
         
         
         protected override void Enter()
         {
             EnemyAddedSignal.AddListener(EnemyAddedHandler);
+            
             EnemyFireController.Init();
+            InputController.Init();
             base.Enter();
         }
 
         protected override void Exit()
         {
             EnemyAddedSignal.RemoveListener(EnemyAddedHandler);
+            
             EnemyFireController.Destroy();
+            InputController.Destroy();
             base.Exit();
         }
 
-        private void EnemyAddedHandler()
+        private void EnemyAddedHandler(int id)
         {
-            Screen.InstantiateFlyingEnemyUnit();
-            Debug.Log("Enemy Added handler");
+            Screen.InstantiateFlyingEnemyUnit(id);
         }
         
     }
