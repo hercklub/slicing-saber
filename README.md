@@ -1,5 +1,5 @@
 # Saber slice
-Simple demo game project created using **Unity 2019.4.13f1** and **Strange IoC** 
+Simple demo game project created using **Unity 2019.4.13f1** and **Strange IoC**.
 
 ![Strage IoC](http://strangeioc.github.io/strangeioc/class-flow.png)
 - [Strange](https://github.com/strangeioc/strangeioc) is a super-lightweight and highly extensible Inversion-of-Control (IoC) framework.
@@ -16,8 +16,8 @@ The scene holds only ViewConfig that defines containers for later instancing.
 ### View/Mediator
 Mediator acts as an interface between View and Model. Processing all logic, getting data, preparing for the final render.
 ### Data
-Static data are defined in Scriptable objects (blade colors)
-Dynamic data are stored mostly in data models and retrieved by mediators/controllers
+Static data are defined in Scriptable objects.
+Dynamic data are stored mostly in data models and retrieved by mediators/controllers.
 ### Signal
  Events that are dispatched using an event bus that makes information flow easy and highly decoupled.
 ### Commands
@@ -26,5 +26,5 @@ Commands are objects that are bind to specific signal calls serve as a nice cont
 FSM is used to control the game lifecycle.
 
 ## Credits
-[Strange](https://github.com/strangeioc/strangeioc) core framework used in this application
+[Strange](https://github.com/strangeioc/strangeioc) core framework used in this application\
 Framewerk - extension co-developed with Matej Ošanec
